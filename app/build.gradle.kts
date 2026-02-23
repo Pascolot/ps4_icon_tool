@@ -20,16 +20,13 @@ android {
 
     // --- SIGNING BLOCK ADDED ---
     signingConfigs {
-        create("release") {
-            // We use double backslashes \\ so Windows correctly understands the path
-            storeFile = file("D:\\ps4games\\PKG\\ilaina\\apk-ps3-ps4\\kizeokey.jks")
-            storePassword = "mixiaomi16"
-            keyAlias = "hfw"
-            keyPassword = "mixiaomi16"
-
-            // We force both signing schemes to avoid Play Protect blocks
-            enableV1Signing = true
-            enableV2Signing = true
+    create("release") {
+        storeFile = file("kizeokey.jks")  // ✅ relative to app/ folder
+        storePassword = "mixiaomi16"
+        keyAlias = "hfw"
+        keyPassword = "mixiaomi16"
+        enableV1Signing = true
+        enableV2Signing = true
         }
     }
 
