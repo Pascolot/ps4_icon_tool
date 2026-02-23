@@ -28,8 +28,8 @@ jobs:
             - name: Grant Gradle execute permission
               run: chmod +x gradlew
 
-            # 4. Recreate the exact folder path your build.gradle.kts expects
-            #    and decode the keystore into it
+            # 4. Decode the keystore and place it in the app/ folder
+            #  This matches what build.gradle.kts resolves with file("kizeokey.jks")
             - name: Decode keystore
               run: |
                   echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > ${{ github.workspace }}/app/kizeokey.jks
