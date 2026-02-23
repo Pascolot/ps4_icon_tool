@@ -6,6 +6,10 @@ on:
             - "v*.*.*" # Triggers on version tags like v1.0.0, v1.2.3
     workflow_dispatch: # Allows manual trigger from GitHub UI
 
+# Grant the GITHUB_TOKEN permission to create releases
+permissions:
+    contents: write
+
 jobs:
     build:
         name: Build Signed APK
@@ -48,10 +52,16 @@ jobs:
             - name: Build Release APK
               run: ./gradlew assembleRelease
 
-            # 7. Rename the APK with the version tag (or "manual" if triggered manually)
+            # 7. Rename the APK smartly:
+            #    - Tag push    → PS4IconTool-v1.0.0.apk
+            #    - Manual run  → PS4IconTool-manual-20260223-143022.apk
             - name: Rename APK
               run: |
-                  VERSION=${GITHUB_REF_NAME:-manual}
+                  if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+                    VERSION="manual-$(date +'%Y%m%d-%H%M%S')"
+                  else
+                    VERSION=${GITHUB_REF_NAME}
+                  fi
                   mv app/build/outputs/apk/release/app-release.apk \
                      app/build/outputs/apk/release/PS4IconTool-${VERSION}.apk
 
