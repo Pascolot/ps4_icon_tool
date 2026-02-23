@@ -32,9 +32,7 @@ jobs:
             #    and decode the keystore into it
             - name: Decode keystore
               run: |
-                  mkdir -p "D:/ps4games/PKG/ilaina/apk-ps3-ps4"
-                  echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode \
-                    > "D:/ps4games/PKG/ilaina/apk-ps3-ps4/kizeokey.jks"
+                  echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > ${{ github.workspace }}/app/kizeokey.jks
 
             # 5. Build the signed release APK
             #    No extra env vars needed — gradle reads directly from build.gradle.kts
