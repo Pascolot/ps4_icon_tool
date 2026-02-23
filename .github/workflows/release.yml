@@ -48,7 +48,7 @@ jobs:
             - name: Build Release APK
               run: ./gradlew assembleRelease
 
-            # 7. Rename the APK with the version tag
+            # 7. Rename the APK with the version tag (or "manual" if triggered manually)
             - name: Rename APK
               run: |
                   VERSION=${GITHUB_REF_NAME:-manual}
@@ -63,9 +63,10 @@ jobs:
                   path: app/build/outputs/apk/release/PS4IconTool-*.apk
                   retention-days: 7
 
-            # 9. Create a GitHub Release and attach the APK (only on tag pushes)
+            # 9. Create a GitHub Release and attach the APK
+            #    Runs on tag pushes AND manual triggers
             - name: Create GitHub Release
-              if: startsWith(github.ref, 'refs/tags/')
+              if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
               uses: softprops/action-gh-release@v2
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
