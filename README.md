@@ -7,7 +7,7 @@ Avec cet outil, vous pouvez changer les icônes et les fonds d'écran du menu pr
 
     🖼️ Changer les Icônes : Mettez à jour l'icon0.png de n'importe quel jeu.
 
-    🌆 Personnaliser les Pochettes : Modifiez le fond affiché lors de la sélection d'un jeu (pic0.png, pic1.png).
+    🌆 Personnaliser les couvertures : Modifiez le fond affiché lors de la sélection d'un jeu (pic0.png, pic1.png).
 
     🧹 Nettoyage du menu : Supprimez les sons indésirables (SND0.AT9).
 
